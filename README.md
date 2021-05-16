@@ -1,6 +1,8 @@
 # AllInOneShell
 by Mercury180#6286
 
+![demo image](./demo.png)
+
 ### Creation
 
 I was faced with a couple of problems that made me decide to make this tool:
