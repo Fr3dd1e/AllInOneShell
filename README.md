@@ -1,7 +1,7 @@
 # AllInOneShell
 by Mercury180#6286
 
-![demo image](./demo.png)
+![demo image](images/demo.png)
 
 ### Creation
 
@@ -23,8 +23,11 @@ What it does:
 
 ### Config
 
-The default port for the HTTP server is `80`, to try and bypass any firewall restrictions, but this can be changed easily at the top of the script in "# Config Items".
+The default port for the HTTP server is `80` (to try and bypass some basic firewall restrictions), but this can be changed easily at the top of the script in "# Config Items".
 Be aware, the HTTP process detaches and once the reverse shell comes through, it can be a pain to kill. There is a timeout for 5 minutes on the process, but that can be extended in the config again.
+
+![config image](images/config.png)
+
 
 ### Note
 
