@@ -17,7 +17,20 @@ http_timeout=300
 
 # Banner:
 function print_banner(){
-	printf $UNDERLINED$LIGHT_GREY"Shell Generator"$NC" for "$YELLOW"HackTheBox"$NC" and "$YELLOW"TryHackMe"$NC"\n - by "$YELLOW"Mercury \n"$NC
+	banner='		 __                   __             __              __        
+                / /\                 /\ \           /\ \            / /\      
+               / /  \                \ \ \         /  \ \          / /  \     
+              / / /\ \               /\ \_\       / /\ \ \        / / /\ \__  
+             / / /\ \ \             / /\/_/      / / /\ \ \      / / /\ \___\ 
+            / / /  \ \ \           / / /        / / /  \ \_\     \ \ \ \/___/ 
+           / / /___/ /\ \         / / /        / / /   / / /      \ \ \       
+          / / /_____/ /\ \       / / /        / / /   / / /   _    \ \ \      
+         / /_________/\ \ \  ___/ / /__      / / /___/ / /   /_/\__/ / /      
+        / / /_       __\ \_\/\__\/_/___\    / / /____\/ /    \ \/___/ /       
+        \_\___\     /____/_/\/_________/    \/_________/      \_____\/        
+                                                                              '
+    echo "$LIGHT_GREY$banner$NC"
+	printf $RED"			AllInOneShell"$NC$YELLOW" - by Mercury#6286 \n"$NC
 	printf "\n"
 }
 
