@@ -12,7 +12,7 @@ NC="${C}[0m"
 UNDERLINED="${C}[4m"
 
 # Config Items
-http_port=80
+http_port=4444
 http_timeout=300
 
 # Banner:
@@ -89,6 +89,21 @@ print_banner
 # Initalise Local IP/Port
 IP=$1
 PORT=$2
+
+check_netcat(){
+	binary=$(readlink -f $(which nc))
+	if [[ $binary == "/usr/bin/nc.traditional" ]]; then
+		echo -n ""
+	else
+		echo -n $BLUE"[*]"$NC" Wrong netcat binary found, would you like to install ncat (Y/n): "
+		read CHOICE
+		if [[ ${CHOICE@U} == "N" ]]; then
+			echo -n ""
+		else
+			sudo apt install ncat
+		fi
+	fi
+}
 
 # From input:
 get_ip(){
@@ -206,7 +221,8 @@ function kill_servers(){
 	echo
 }
 
-kill_servers
-rev_file
-http_server $tmp_dir
-use_netcat
+#kill_servers
+#rev_file
+#http_server $tmp_dir
+#use_netcat
+check_netcat

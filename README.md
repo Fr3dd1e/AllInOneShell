@@ -29,17 +29,21 @@ Be aware, the HTTP process detaches and once the reverse shell comes through, it
 ![config image](images/config.png)
 
 
-### Note
+### Notes
 
-This program is made specifically for HTB/THM, and should definitely not be used for anything other than boot2root machines. It is quite clunky, but it gives the advantage of convenience, as it tries to incorporate everything you need in a bash script. 
+> The `nc.traditional` binary struggles to keep TCP sockets open, so I've built in a quick function to detect if it is being used by `nc`, and if so upgrades it to `ncat`, which is generally better (also supports IPv6), and more secure (isn't compiled using the GAPING_SECURITY_FLAW flag).
+
+> Additionally, the reverse shells are currently only for Linux, but I'm definitely working on expanding this to work for Windows/Powershell.
+
+> This program is made specifically for HTB/THM, and should definitely not be used for anything other than boot2root machines. It is quite clunky, but it gives the advantage of convenience, as it tries to incorporate everything you need in a bash script. 
 Additionally, the tmp directories are not deleted, but will be on machine restart. 
 `rm -r /tmp/tmp-*`, to do this manually.
 
-```sh
+> ```sh
 ln -sf [path to allinoneshell.sh] /usr/bin/aios
 ```
 
-Then to call the reverse shell tool, simply run `aios`.
+> Then to call the reverse shell tool, simply run `aios`.
 
-This tool only covers a few of the programs that can be used for reverse shells.
+> This tool only covers a few of the programs that can be used for reverse shells.
 To see more, visit https://www.revshells.com/, by the notorious 0day.
