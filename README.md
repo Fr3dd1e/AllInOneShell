@@ -21,6 +21,11 @@ What it does:
 - Starts a netcat listener to catch any reverse shells.
 - The HTTP server will timeout after 5 minutes, as the process is detached.
 
+UPDATE:
+- I've now incorporated a quick script I was using for generating a socat encrypted reverse shell into AIOS.
+- You are now presented with the option for either the more reliable (multiple programs checked) netcat listener/file, or the encrypted socat listener/file.
+- Unfortunately I couldn't include the socat reverse shell into the general bash revshell file, as it uses a different type of listener.
+
 ### Config
 
 The default port for the HTTP server is `80` (to try and bypass some basic firewall restrictions), but this can be changed easily at the top of the script in "# Config Items".
