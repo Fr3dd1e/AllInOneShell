@@ -45,7 +45,7 @@ Additionally, the tmp directories are not deleted, but will be on machine restar
 `rm -r /tmp/tmp-*`, to do this manually.
 
 > ```sh
-ln -sf [path to allinoneshell.sh] /usr/bin/aios
+ln -sf [path to aios.sh] /usr/bin/aios
 ```
 
 > Then to call the reverse shell tool, simply run `aios`.
