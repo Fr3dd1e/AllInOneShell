@@ -38,6 +38,7 @@ function print_banner(){
 # Initalise Local IP/Port
 export IP=$1
 export PORT=$2
+export MODE=$3
 
 # Get ip/port from input:
 get_ip(){
@@ -59,7 +60,7 @@ function get_port_ip(){
 			get_ip;
 		else
 			echo $BLUE"[*]"$NC" VPN connection found: using tun0 as address"
-			export P=$(ifconfig tun0 2>/dev/null | grep 'inet ' | awk '{print $2}')
+			export IP=$(ifconfig tun0 2>/dev/null | grep 'inet ' | awk '{print $2}')
 		fi
 	fi
 
@@ -246,11 +247,11 @@ function kill_servers(){
 }
 
 
-function choose_option(){
+function choose_mode(){
 	echo "1) Netcat multi-shell"
 	echo "2) Socat encrypted shell"
 	echo -n "[1|2]: "
-	read choice
+	read MODE
 }
  
 function run_netcat(){
@@ -273,7 +274,11 @@ export tmp_dir=$(mktemp -d)
 
 print_banner
 get_port_ip
-choose_option
+if [[ "$MODE" != "" ]]; then
+	echo -n ""
+else
+	choose_mode
+fi
 
 # Print options
 printf $LIGHT_GREY"[*]"$NC" IP: $IP\n"
@@ -281,13 +286,13 @@ printf $LIGHT_GREY"[*]"$NC" PORT: $PORT\n"
 
 
 
-case $choice in
-	1) echo $LIGHT_GREY"[*]"$NC" CHOICE: Netcat";
+case $MODE in
+	1) echo $LIGHT_GREY"[*]"$NC" MODE: Netcat";
 	echo ""
 	kill_servers
 	run_netcat
 	;;
-	2) echo $LIGHT_GREY"[*]"$NC" CHOICE: Socat";
+	2) echo $LIGHT_GREY"[*]"$NC" MODE: Socat";
 	echo ""
 	kill_servers
 	run_socat

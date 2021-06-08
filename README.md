@@ -20,6 +20,8 @@ What it does:
 - Prints how to call the bash script from your local machine using `curl` or `wget`
 - Starts a netcat listener to catch any reverse shells.
 - The HTTP server will timeout after 5 minutes, as the process is detached.
+- Added potential for command line parameters, so can be run in batch mode if needed:
+`aios [IP] [PORT] [MODE]`
 
 UPDATE:
 - I've now incorporated a quick script I was using for generating a socat encrypted reverse shell into AIOS.
