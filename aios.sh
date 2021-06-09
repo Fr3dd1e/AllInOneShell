@@ -84,6 +84,11 @@ function get_port_ip(){
 	fi
 }
 
+# Because this exports, basically the variable needs to be exported before functions are called.
+# I could rearrange the order, and pass in the IP/PORT as an arg, but realistically, I don't have the time right now.
+print_banner
+get_port_ip
+
 # Shell commands:
 
 cmd='
@@ -211,7 +216,8 @@ function use_netcat(){
     	printf $LIGHT_GREY"[=]"$NC" Netcat is not installed on the system!\n"
     fi
 }
-
+echo $IP
+echo $PORT
 cmd=$(echo "$cmd" | sed -e "s/IP_REPLACE/$IP/g" | sed -e "s/PORT_REPLACE/$PORT/g")
 
 function rev_file(){
@@ -272,8 +278,7 @@ function run_socat(){
 # Create temporary directory to operate from
 export tmp_dir=$(mktemp -d)
 
-print_banner
-get_port_ip
+
 if [[ "$MODE" != "" ]]; then
 	echo -n ""
 else
