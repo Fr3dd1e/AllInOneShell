@@ -1,5 +1,5 @@
 # AllInOneShell
-by Mercury180#6286
+by Freddie
 
 ![demo image](images/demo.png)
 
