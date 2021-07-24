@@ -1,5 +1,5 @@
 #!/bin/bash
-# Reverse Shell Generator by Mercury
+# Reverse Shell Generator by Freddie
 
 # Colours:
 C=$(printf '\033')
@@ -31,7 +31,7 @@ function print_banner(){
         \_\___\     /____/_/\/_________/    \/_________/      \_____\/        
                                                                               '
     echo "$LIGHT_GREY$banner$NC"
-	printf $RED"			AllInOneShell"$NC$YELLOW" - by Mercury#6286 \n"$NC
+	printf $RED"			AllInOneShell"$NC$YELLOW" - by Freddie \n"$NC
 	printf "\n"
 }
 
